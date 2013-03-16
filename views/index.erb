@@ -1,0 +1,10 @@
+<html>
+<h1>Friendalyzer</h1>
+<body>
+	<% @feed_items = getFeed %>
+	<% @feed_items.each do |f| %>
+		<% puts f["message"] %>
+		<p><%= f["message"] %></p>
+	<% end %>
+</body>
+</html>
