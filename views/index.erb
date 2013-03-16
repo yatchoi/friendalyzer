@@ -1,9 +1,14 @@
 <html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style/reset.css">
+</head>
 <h1>Friendalyzer</h1>
 <body>
 	<% @feed_words = getFeed %>
-	<% @feed_words.each do |w| %>
-		<p>w</p>
+	<% @feed_words.sort_by {|k,v| k}.each do |key, value| %>
+		<% @base_font_size = 20 %>
+		<% @font_size = @base_font_size + 4 * value %>
+		<h3 style="font-size: <%= @font_size %>"><%= key %></h3>
 	<% end %>
 </body>
 </html>

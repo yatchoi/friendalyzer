@@ -3,9 +3,7 @@ require 'koala'
 
 module Sinatra
 	module Facebooker
-		$accessToken = "";
-		$wordHash = Hash.new
-		$wordHash.default = 0
+		$accessToken = "AAACEdEose0cBAIri88WUhQWf60YJbIgDybuc2bPqKFBJ9o41ENkcr1nIDrrupoHmTRG6op1uZB8dZBwYapL3ZBQ5nX78rNJxoDZCsioK8gZDZD";
 
 		def bar(name)
 			"#{name}bar"
@@ -19,15 +17,17 @@ module Sinatra
 		end
 
 		def parseFeed(feed)
+			wordHash = Hash.new
+			wordHash.default = 0
 			feed.each do |f|
 				tokens = f["message"].split(" ")
 				tokens.each do |t|
 					t.downcase!
 					t = cleanWord(t)
-					$wordHash[t] += 1
+					wordHash[t] = wordHash[t] + 1
 				end
 			end
-			$wordHash
+			wordHash
 		end
 
 		def cleanWord(word)
