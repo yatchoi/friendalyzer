@@ -16,7 +16,6 @@ module Sinatra
 
 			feed = @rest.fql_query("select message from status where uid=me()")
 			parseFeed(feed)
-			feed
 		end
 
 		def parseFeed(feed)
@@ -24,11 +23,18 @@ module Sinatra
 				tokens = f["message"].split(" ")
 				tokens.each do |t|
 					t.downcase!
+					t = cleanWord(t)
 					$wordHash[t] += 1
 				end
 			end
-			puts $wordHash
+			$wordHash
 		end
+
+		def cleanWord(word)
+			result = word.gsub(/[^a-z ]/, '')
+			result.gsub(/(.)\1{2,}\z/, '\1')
+		end
+
 	end
 
 	helpers Facebooker
