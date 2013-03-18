@@ -5,7 +5,7 @@
 </head>
 <h1>Friendalyzer</h1>
 <body>
-	<% @feed_words = getFeed %>
+	<% @feed_words = getFeed(@token) %>
 	<% @counter = 1 %>
 	<% @feed_words.sort_by {|k,v| k}.each do |key, value| %>
 		<% @base_font_size = 20 %>

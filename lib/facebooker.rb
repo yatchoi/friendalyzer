@@ -1,18 +1,17 @@
 require 'sinatra/base'
+require 'sinatra/contrib'
 require 'koala'
 
 module Sinatra
 	module Facebooker
-		$accessToken = ENV['ACCESS']
-
-		def bar(name)
-			"#{name}bar"
-		end
+		$debugAccessToken = ENV['DEBUG_ACCESS']
+		$app_id = ENV['APP_ID']
+		$app_secret = ENV['APP_SECRET']
 	
-		def getFeed
-			@rest = Koala::Facebook::API.new($accessToken)
+		def getFeed(token)
+			rest = Koala::Facebook::API.new(token)
 
-			feed = @rest.fql_query("select message from status where uid=me()")
+			feed = rest.fql_query("select message from status where uid=me()")
 			parseFeed(feed)
 		end
 
