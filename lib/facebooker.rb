@@ -3,7 +3,7 @@ require 'koala'
 
 module Sinatra
 	module Facebooker
-		$accessToken = "AAACEdEose0cBAIri88WUhQWf60YJbIgDybuc2bPqKFBJ9o41ENkcr1nIDrrupoHmTRG6op1uZB8dZBwYapL3ZBQ5nX78rNJxoDZCsioK8gZDZD";
+		$accessToken = ENV['ACCESS']
 
 		def bar(name)
 			"#{name}bar"

@@ -1,0 +1,12 @@
+.word {
+	float: left;
+	position: relative;
+}
+
+.word-blue {
+	color: blue;
+}
+
+.word-red {
+	color: darkred;
+}
