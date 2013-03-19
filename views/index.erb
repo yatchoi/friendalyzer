@@ -3,22 +3,15 @@
 	<link rel="stylesheet" type="text/css" href="style/reset.css">
 	<link rel="stylesheet" type="text/css" href="style/style.css">
 </head>
-<h1>Friendalyzer</h1>
+<h1>Facebook Friendalyzer</h1>
 <body>
-	<% @feed_words = getFeed(@token) %>
-	<% @counter = 1 %>
-	<% @feed_words.sort_by {|k,v| k}.each do |key, value| %>
-		<% @base_font_size = 20 %>
-		<% @font_size = @base_font_size + 6 * value %>
-
-		<% @class="word" %>
-		<% if @counter % 7 == 0 then %>
-			<% @class += " word-blue" %>
-		<% elsif @counter % 5 == 0 then %>
-			<% @class += " word-red" %>
-		<% end %>
-		<% @counter = @counter + 1 %>
-		<h3 class="<%= @class %>" style="font-size: <%= @font_size %>"><%= key %></h3>
+	<a href="/words/0">My Words</a>
+	<% @friends = getFriends($token) %>
+	<% @friends.each do |f| %>
+		<% url = "/words/" %>
+		<% url += f["id"].to_s %>
+		<a href="<%= url %>"><%= f["name"] %>'s Words</a>
+		<br>
 	<% end %>
 </body>
 </html>

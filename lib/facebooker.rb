@@ -4,14 +4,22 @@ require 'koala'
 
 module Sinatra
 	module Facebooker
-		$debugAccessToken = ENV['DEBUG_ACCESS']
-		$app_id = ENV['APP_ID']
-		$app_secret = ENV['APP_SECRET']
-	
-		def getFeed(token)
+
+		def getFriends(token)
 			rest = Koala::Facebook::API.new(token)
 
-			feed = rest.fql_query("select message from status where uid=me()")
+			friends = rest.fql_query("SELECT id, name FROM profile WHERE id IN (SELECT uid2 from friend where uid1=me()) ORDER BY name")
+			friends
+		end
+	
+		def getFeed(token, fid)
+			rest = Koala::Facebook::API.new(token)
+
+			if fid == '0' then
+				fid = "me()"
+			end
+
+			feed = rest.fql_query("select message from status where uid=" + fid)
 			parseFeed(feed)
 		end
 
